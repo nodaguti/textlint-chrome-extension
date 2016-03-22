@@ -22,6 +22,10 @@ const MESSAGES = {
   LINT_TEXT: "LintText",
   CORRECT_TEXT: "CorrectText",
   UPDATE_STATUS: "UpdateStatus",
+
+  // Popup -> Background
+  GET_POPUP_SETTINGS: 'GetPopupSettings',
+  SET_POPUP_SETTINGS: 'SetPopupSettings',
 };
 const VALID_MESSAGES = _.invert(MESSAGES);
 

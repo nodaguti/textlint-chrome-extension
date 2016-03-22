@@ -5,13 +5,16 @@
 import _ from "lodash";
 import appConfig from "../app/app-config";
 import AppOptions from "../app/app-options";
+import AppStorage from "../app/app-storage";
 import Badge from "./badge";
 import linters from "./linters";
 import messages from "./messages";
+import PopupSettingsStore from "./popup-settings-store";
 
 export default function () {
   const appOptions = new AppOptions({});
   const badge = new Badge(appOptions);
+  const popupSettings = new PopupSettingsStore();
 
   appOptions.load();
 
@@ -70,6 +73,13 @@ export default function () {
   });
   messages.onGetOptions((msg, sender, sendResponse) => {
     sendResponse(appOptions.contentOptions);
+  });
+  messages.onGetPopupSettings((msg, sender, sendResponse) => {
+    sendResponse(popupSettings.getSettings());
+  });
+  messages.onSetPopupSettings(({ settings }, sender, sendResponse) => {
+    popupSettings.setSettings(settings);
+    sendResponse();
   });
 
   // Export for popup

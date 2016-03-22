@@ -21,11 +21,17 @@ export default {
     return cutil.syncSetValue(OPTIONS, options);
   },
 
+  observePopupSettingsUpdate(callback) {
+    chrome.storage.onChanged.addListener((changes, areaName) => {
+      if (changes[POPUP_SETTINGS]) {
+        callback(changes[POPUP_SETTINGS]);
+      }
+    });
+  },
   observeOptionsUpdate(callback) {
     chrome.storage.onChanged.addListener((changes, areaName) => {
-      DEBUG && console.log("Storage updated: ", changes);
-      if (changes["options"]) {
-        callback(changes["options"]);
+      if (changes[OPTIONS]) {
+        callback(changes[OPTIONS]);
       }
     });
   },

@@ -3,10 +3,10 @@
 "use strict";
 
 import _ from "lodash";
-import appStorage from "../app/app-storage";
+import messages from "./messages";
 import textlintRulesets from "../textlint/textlint-rulesets";
 
-const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS = {
   ruleset: null, // textlintRulesets.getDefaultRulesetName()
   format: "txt",
 };
@@ -14,7 +14,7 @@ const DEFAULT_SETTINGS = {
 export default class PopupSettings {
   static load() {
     return new Promise((resolve, reject) => {
-      appStorage.getPopupSettings().then((settings) => {
+      messages.getPopupSettings().then((settings) => {
         resolve(new PopupSettings(settings));
       }).catch(reject);
     });
@@ -49,13 +49,13 @@ export default class PopupSettings {
 
   load() {
     return new Promise((resolve, reject) => {
-      appStorage.getPopupSettings().then((settings) => {
+      messages.getPopupSettings().then((settings) => {
         this.overwrite(settings);
         resolve(this);
       }).catch(reject);
     });
   }
   save() {
-    return appStorage.setPopupSettings(this.toObject());
+    return messages.setPopupSettings(this.toObject());
   }
 }

@@ -13,6 +13,14 @@ export default {
     messages.on(messages.GET_OPTIONS, callback);
   },
 
+  onGetPopupSettings(callback) {
+    messages.on(messages.GET_POPUP_SETTINGS, callback);
+  },
+
+  onSetPopupSettings(callback) {
+    messages.on(messages.SET_POPUP_SETTINGS, callback);
+  },
+
   onLintText(callback) {
     messages.on(messages.LINT_TEXT, callback);
   },
